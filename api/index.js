@@ -17,12 +17,16 @@
 //     =====`-.____`.___ \_____/___.-`___.-'=====
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-const server = require('./src/app.js');
-const { conn } = require('./src/db.js');
+const server = require("./src/app.js");
+const { genres } = require("./src/controllers/genreController");
+const { conn } = require("./src/db.js");
+const { serverPort } = require("./src/utils/config/index");
 
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
-  server.listen(3001, () => {
-    console.log('%s listening at 3001'); // eslint-disable-line no-console
+  console.log("Database connected");
+  server.listen(serverPort, async () => {
+    console.log(`Server listening on port ${serverPort}`);
+    await genres();
   });
 });
