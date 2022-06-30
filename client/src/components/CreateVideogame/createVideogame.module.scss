@@ -1,0 +1,62 @@
+@import "../sass/mixins.scss";
+@import "../sass/variables.scss";
+@import "../sass/functions.scss";
+
+.contenedorPrincipal {
+  display: flex;
+  width: 100%;
+  margin-top: toRem(40);
+  @include main-gradient;
+
+  h2 {
+    text-align: center;
+    padding-bottom: toRem(20);
+    color: $negro;
+    font-size: toRem(32);
+  }
+
+  form {
+    width: 40%;
+    max-height: 100%;
+    margin: toRem(50) auto;
+    padding: toRem(30) toRem(25);
+    border-radius: toRem(10);
+    @include form-gradient;
+
+    .campo {
+      display: flex;
+      flex-direction: column;
+
+      label {
+        font-size: toRem(20);
+      }
+
+      input,
+      textarea,
+      select {
+        margin-bottom: toRem(20);
+        outline: none;
+        border: none;
+        font-size: toRem(20);
+        padding: toRem(5) toRem(5);
+        @include background-glass;
+
+        &:hover {
+          box-shadow: 0 0 5px $gris1;
+        }
+
+        &:focus {
+          background-color: $gris1;
+        }
+      }
+
+      .submit {
+        &:hover {
+          background-color: $primario;
+          color: $gris1;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

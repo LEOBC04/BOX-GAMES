@@ -1,9 +1,21 @@
-import React from "react";
 import s from "./home.module.scss";
 import Footer from "./footer";
 import Aside from "./aside";
+import Card from "../Card/card";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllVideogames } from "../../Redux/thunks/videogameThunks.js";
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const { videogames } = useSelector((state) => state.videogames);
+
+  useEffect(() => {
+    if(videogames.length === 0) {
+    dispatch(fetchAllVideogames());
+    }
+  }, [dispatch, videogames]);
+
   return (
     <div>
       <header className={s.header}>
@@ -18,7 +30,18 @@ const Home = () => {
 
       <main className={s.contenedorPrincipal}>
         <Aside />
-        <section className={s.cardsContainer}></section>
+        <section className={s.cardsContainer}>
+          {videogames.map((game) => (
+            <Card
+              id={game.id}
+              image={game.image}
+              name={game.name}
+              genres={game.genres}
+              released={game.released}
+              rating={game.rating}
+            />
+          ))}
+        </section>
       </main>
 
       <Footer />

@@ -9,7 +9,7 @@ const Favorites = () => {
         <h2>Your favorites:</h2>
       </section>
 
-      <Footer/>
+      <Footer />
     </div>
   );
 };
