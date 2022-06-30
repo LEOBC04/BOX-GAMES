@@ -1,0 +1,97 @@
+@import '../sass/variables.scss';
+@import '../sass/mixins.scss';
+
+.container{
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  @include main-gradient;
+}
+
+.sonic {
+  width: 60%;
+  height: 365px;
+  position: absolute;
+  left: 38%;
+  top: 10%;
+
+  img {
+    width: 100%;
+    object-fit: contain;
+  }
+}
+
+.logoContainer {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  justify-content: center;
+  width: 280px;
+  height: 70px;
+  box-shadow: 1px 1px 5px $primario;
+
+}
+
+.logoContainer__imageContainer {
+  width: 70px;
+  height: 70px;
+}
+
+.logoContainer__image {
+  width: 100%;
+  height: 100%;
+}
+
+.logoContainer__text {
+  width: 200px;
+  height: 70px;
+  margin: 0;
+  text-align: center;
+  font-size: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: $blanco;
+  text-shadow: 1px 1px 5px $primario;
+  
+}
+
+.header {
+  position: absolute;
+  width: 500px;
+  height: 320px;
+  top: 40vh;
+  left: 1.5vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+}
+
+.header__title {
+  text-align: left;
+  font-size: 55px;
+  color: $blanco;
+  text-shadow: 1px 1px 5px $primario;
+}
+
+.header__button {
+  text-decoration: none;
+  width: 110px;
+  height: 60px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  color: $blanco;
+  font-size: 1.4rem;
+  text-shadow: 1px 1px 5px $primario;
+  background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
+
+  &:hover {
+    box-shadow: 0 0 5px $secundario;
+    background-image: linear-gradient(to top, #b224ef 0%, #7579ff 100%);
+  }
+}

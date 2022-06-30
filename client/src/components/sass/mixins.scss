@@ -1,0 +1,20 @@
+//Background image
+@mixin background-image($imagen) {
+  background-image: url($imagen);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+//Background gradient 
+
+@mixin main-gradient {
+  background-image: linear-gradient(to top, #09203f 0%, #537895 100%);  
+}
+
+@mixin nav-gradient {
+  background-image: linear-gradient(to top, #1e3c72 0%, #1e3c72 1%, #2a5298 100%);
+}
+
+@mixin background-glass {
+  background-color: rgba($color: #f8f9fa, $alpha: 0.25);
+}
