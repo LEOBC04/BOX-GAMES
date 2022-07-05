@@ -9,7 +9,7 @@ const genres = async () => {
     ).data.results;
 
     const apiGenresFiltered = await apiGenres.map((obj) => {
-      return { name: obj.name.toLowerCase() };
+      return { name: obj.name };
     });
 
     await Genre.bulkCreate(apiGenresFiltered);

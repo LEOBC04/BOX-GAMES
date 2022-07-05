@@ -1,11 +1,11 @@
 const axios = require("axios");
-const { Videogame, Genre } = require("../db");
+const { Videogame, Genre, Op } = require("../db");
 const { apiKey } = require("../utils/config/index");
 
 const apiVideogames = async () => {
   try {
     let videogames = [];
-    const pages = [10, 11, 12, 13, 14];
+    const pages = [10];
 
     for (let i = 0; i < pages.length; i++) {
       const page = (
@@ -26,9 +26,12 @@ const getApiVideogames = async () => {
     const videogames = await apiVideogames();
     const videogamesFiltered = videogames.map((game) => {
       return {
+        id: game.id,
         name: game.name,
         image: game.background_image,
         genres: game.genres.map((genre) => genre.name),
+        rating: game.rating,
+        released: game.released,
       };
     });
     return videogamesFiltered;
@@ -47,6 +50,7 @@ const getDbGames = async () => {
       },
     },
   });
+  return dbGames;
 };
 
 const getAllVideogames = async (req, res, next) => {
@@ -60,27 +64,56 @@ const getAllVideogames = async (req, res, next) => {
   }
 };
 
+const getAllVideogamesForFilters = async () => {
+  try {
+    const apiGames = await getApiVideogames();
+    const dbGames = await getDbGames();
+    const allGames = apiGames.concat(dbGames);
+    return allGames;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const getVideogameByName = async (req, res, next) => {
   const { name } = req.query;
 
   try {
     const apiGame = (
       await axios.get(
-        `https://api.rawg.io/api/games?key=${apiKey}&search=${name}`
+        `https://api.rawg.io/api/games?key=${apiKey}&search=${name.toLowerCase()}`
       )
     ).data.results;
 
+    const apiGamesFiltered = apiGame.map((game) => {
+      return {
+        id: game.id,
+        name: game.name,
+        image: game.background_image,
+        genres: game.genres.map((genre) => genre.name),
+        rating: game.rating,
+        released: game.released,
+      };
+    });
+
     const dbGame = await Videogame.findAll({
       where: {
-        name: `${name}`,
+        name: { [Op.iLike]: name },
+      },
+      include: {
+        model: Genre,
+        attributes: ["name"],
+        through: {
+          attributes: [],
+        },
       },
     });
 
     if (dbGame.length) {
-      const result = apiGame.slice(0, 14);
+      const result = apiGamesFiltered.slice(0, 14);
       res.status(200).send(result.concat(dbGame));
     } else {
-      const result = apiGame.slice(0, 15);
+      const result = apiGamesFiltered.slice(0, 15);
       res.status(200).send(result);
     }
   } catch (error) {
@@ -106,11 +139,11 @@ const getVideogameById = async (req, res, next) => {
         },
       });
       console.log(id);
-      res.status(200).send(dbVideogame)
+      res.status(200).send(dbVideogame);
     } else {
-      const apiVideogame = (await axios.get(
-        `https://api.rawg.io/api/games/${id}?key=${apiKey}`
-      )).data
+      const apiVideogame = (
+        await axios.get(`https://api.rawg.io/api/games/${id}?key=${apiKey}`)
+      ).data;
 
       const videogame = {
         name: apiVideogame.name,
@@ -120,9 +153,9 @@ const getVideogameById = async (req, res, next) => {
         released: apiVideogame.released,
         rating: apiVideogame.rating,
         platforms: apiVideogame.platforms,
-      }
+      };
 
-      res.status(200).send(videogame)
+      res.status(200).send(videogame);
     }
   } catch (error) {
     next(error);
@@ -131,7 +164,8 @@ const getVideogameById = async (req, res, next) => {
 
 const postVideogame = async (req, res, next) => {
   try {
-    const { name, description, released, rating, genres, platforms, image } = req.body;
+    const { name, description, released, rating, genres, platforms, image } =
+      req.body;
 
     const createdVideogame = await Videogame.create({
       name,
@@ -143,7 +177,7 @@ const postVideogame = async (req, res, next) => {
     });
 
     genres.forEach(async (genre) => {
-      const currentGenre = genre.toLowerCase();
+      const currentGenre = genre;
       const currentId = await Genre.findOne({
         attributes: ["id"],
         where: {
@@ -163,4 +197,6 @@ module.exports = {
   getVideogameByName,
   getVideogameById,
   postVideogame,
+  getApiVideogames,
+  getAllVideogamesForFilters
 };

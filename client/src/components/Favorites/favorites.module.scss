@@ -1,9 +1,8 @@
-@import '../sass/mixins.scss';
-@import '../sass/variables.scss';
-@import '../sass/functions.scss';
+@import "../sass/mixins.scss";
+@import "../sass/variables.scss";
+@import "../sass/functions.scss";
 
-.cardsContainer {
-  width: 100%;
+.contenedorPrincipal {
   min-height: 100vh;
   margin-top: toRem(40);
   @include main-gradient;
@@ -13,5 +12,110 @@
     text-align: center;
     font-size: toRem(40);
     color: $gris1;
+  }
+
+  .cardsContainer {
+    width: 80%;
+    margin: 0 auto;
+    padding-top: toRem(25);
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content:space-evenly;
+    // background-color: darkslateblue;
+
+    .card {
+      width: toRem(250);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      margin-bottom: toRem(20);
+      border-radius: toRem(5);
+      border: toRem(1) solid $gris2;
+      @include nav-gradient;
+      &:hover {
+        box-shadow: 0 0 toRem(1) $gris1;
+      }
+
+      img {
+        width: 90%;
+        margin: toRem(16) 0 toRem(16) 0;
+        border-radius: toRem(5);
+        border: toRem(1) solid $secundario;
+      }
+
+      h3 {
+        text-align: center;
+        margin-bottom: toRem(16);
+      }
+
+      .genresContainer {
+        height: toRem(32);
+        display: flex;
+        flex-wrap: wrap;
+        // justify-content: space-around;
+
+        p {
+          margin: 0 toRem(3) 0 toRem(3);
+        }
+      }
+
+      .rating {
+        // background-color: aqua;
+        width: 90%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+
+        img {
+          width: 30%;
+          border: none;
+        }
+
+        h3 {
+          font-size: toRem(25);
+        }
+      }
+
+      .buttons {
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+
+        button {
+          font-size: toRem(16);
+          padding: toRem(2) 0;
+          cursor: pointer;
+          @include background-glass;
+          border: none;
+          border-radius: toRem(5);
+
+          &:hover {
+            background-color: $primario;
+            color: white;
+            box-shadow: 0 0 toRem(1) $gris1;
+          }
+        }
+
+        .detail {
+          margin-top: toRem(3);
+          margin-bottom: toRem(16);
+        }
+      }
+    }
+  }
+}
+
+.message {
+  @include main-gradient;
+  min-height: 100vh;
+
+  
+  h2 {
+    color: white;
+    text-align: center;
+    font-size: toRem(40);
+    padding-top: 50vh;
   }
 }
