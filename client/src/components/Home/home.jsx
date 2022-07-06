@@ -1,10 +1,10 @@
 import s from "./home.module.scss";
 import Footer from "./footer";
+import Pagination from "../Pagination/pagination";
 import Aside from "./aside";
 import Card from "../Card/card";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { fetchAllGenres } from "../../Redux/thunks/genreThunks";
 import {
   fetchAllVideogames,
   fetchVideogameByName,
@@ -14,6 +14,16 @@ const Home = () => {
   const inputRef = useRef();
   const dispatch = useDispatch();
   const { videogames } = useSelector((state) => state.videogames);
+  const [currentPage, setcurrentPage] = useState(1);
+  const [gamesPerPage, setGamesPerPage] = useState(15);
+  const lastIndex = currentPage * gamesPerPage;
+  const firstIndex = lastIndex - gamesPerPage;
+  const currentGames = videogames.slice(firstIndex, lastIndex );
+
+  const changePage = (pageNumber) => {
+    setcurrentPage(pageNumber);
+  }
+  
   const initialState = {
     name: "",
   };
@@ -29,7 +39,6 @@ const Home = () => {
   const handleOnSubmit = (e) => {
     e.preventDefault();
     dispatch(fetchVideogameByName(input.name));
-    // dispatch(fetchAllGenres());
     inputRef.current.value = '';
   }
 
@@ -59,9 +68,10 @@ const Home = () => {
 
       <main className={s.contenedorPrincipal}>
         <Aside />
-        {videogames.length > 0 ? (
+        {currentGames.length > 0 ? (
+          <div className={s.cardPageContainer}>
           <section className={s.cardsContainer}>
-            {videogames.map((game) => (
+            {currentGames.map((game) => (
               <Card
                 id={game.id}
                 image={game.image}
@@ -74,6 +84,18 @@ const Home = () => {
               />
             ))}
           </section>
+          
+            <div className={s.pagesContainer}>
+              <Pagination
+                gamesPerPage={gamesPerPage}
+                videogames={videogames}
+                changePage={changePage}
+                currentPage={currentPage}
+              />
+            </div>
+          </div>
+          
+
         ) : (
           <div className={s.loaderContainer}>
             <span className={s.loader}></span>

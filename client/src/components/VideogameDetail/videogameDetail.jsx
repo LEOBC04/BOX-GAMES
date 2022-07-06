@@ -13,7 +13,6 @@ const VideogameDetail = () => {
 
   useEffect(() => {
     dispatch(fetchVideogamesDetail(id));
-    console.log(videogamesDetail.genres);
     return () => dispatch(clearVideogameDetail());
   }, [dispatch, id]);
 

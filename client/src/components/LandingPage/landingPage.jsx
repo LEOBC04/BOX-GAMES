@@ -1,17 +1,16 @@
 import React from "react";
 import s from "./landingPage.module.scss";
 import icon from "../../assets/icon.PNG";
-import sonic from '../../assets/bgLanding.png'
+import sonic from "../../assets/bgLanding.png";
 import { Link } from "react-router-dom";
 
 const LandingPage = () => {
   return (
     <div className={s.container}>
+      <div className={s.sonic}>
+        <img src={sonic} alt="sonic" />
+      </div>
 
-    <div className={s.sonic}>
-      <img src={sonic} alt="sonic"/>
-    </div>
-    
       <div className={s.logoContainer}>
         <div className={s.logoContainer__imageContainer}>
           <img src={icon} alt="perro" className={s.logoContainer__image} />

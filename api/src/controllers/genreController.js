@@ -22,15 +22,34 @@ const genres = async () => {
 const getGenres = async (req, res, next) => {
   try {
     const dbGenres = await Genre.findAll({
-      attributes: ['name']
-    })
-    res.status(200).send(dbGenres)
+      attributes: ["name"],
+    });
+    res.status(200).send(dbGenres);
   } catch (error) {
-    next(error)
+    next(error);
   }
-}
+};
+
+const getPlatforms = async (req, res, next) => {
+  try {
+    const platforms = (
+      await axios.get(`https://api.rawg.io/api/platforms?key=${apiKey}`)
+    ).data.results;
+
+    const allPlatforms = platforms.map((platform) => {
+      return { name: platform.name };
+    });
+
+    const finalPlatforms = allPlatforms.slice(0, 22)
+
+    res.status(200).send(finalPlatforms);
+  } catch (error) {
+    next(error);
+  }
+};
 
 module.exports = {
   genres,
   getGenres,
+  getPlatforms
 };

@@ -98,9 +98,15 @@
           }
         }
 
-        .detail {
-          margin-top: toRem(3);
-          margin-bottom: toRem(16);
+        a {
+          display: flex;
+          flex-direction: column;
+          text-decoration: none;
+          .detail {
+            margin-top: toRem(3);
+            margin-bottom: toRem(16);
+          }
+
         }
       }
     }

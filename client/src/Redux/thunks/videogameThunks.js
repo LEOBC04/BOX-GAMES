@@ -2,7 +2,7 @@ import axios from "axios";
 import {
   getVideogames,
   getDetail,
-  searchVideogame
+  searchVideogame,
 } from "../slices/videogameSlice.js";
 
 const fetchAllVideogames = () => (dispatch) => {
@@ -28,4 +28,15 @@ const fetchVideogameByName = (name) => (dispatch) => {
     .catch((error) => console.log(error));
 };
 
-export { fetchAllVideogames, fetchVideogamesDetail, fetchVideogameByName };
+const saveVideogame = (form) => () => {
+  axios
+    .post("http://localhost:3001/videogames", form)
+    .catch((error) => console.log(error));
+};
+
+export {
+  fetchAllVideogames,
+  fetchVideogamesDetail,
+  fetchVideogameByName,
+  saveVideogame,
+};

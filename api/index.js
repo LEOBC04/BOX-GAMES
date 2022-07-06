@@ -22,8 +22,7 @@ const { genres } = require("./src/controllers/genreController");
 const { conn } = require("./src/db.js");
 const { serverPort } = require("./src/utils/config/index");
 
-// Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: false }).then(() => {
   console.log("Database connected");
   server.listen(serverPort, async () => {
     console.log(`Server listening on port ${serverPort}`);

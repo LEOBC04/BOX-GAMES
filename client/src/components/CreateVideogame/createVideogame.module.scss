@@ -34,7 +34,7 @@
       input,
       textarea,
       select {
-        margin-bottom: toRem(20);
+        margin-bottom: toRem(5);
         outline: none;
         border: none;
         font-size: toRem(20);
@@ -47,6 +47,37 @@
 
         &:focus {
           background-color: $gris1;
+        }
+      }
+
+      span {
+        margin-bottom: toRem(20);
+        padding: toRem(5);
+        color: #d90429;
+        // text-shadow: 0 0 2px $primario;
+      }
+
+      ul {
+        list-style: none;
+        display: flex;
+        justify-content: flex-start;
+
+        li {
+          margin-left: toRem(5);
+
+          button {
+            padding: toRem(3) toRem(3);
+            background-color: $primario;
+            border-radius: toRem(5);
+            border: toRem(1) solid $gris1;
+            color: $gris1;
+            font-size: toRem(15);
+            
+            &:hover {
+              cursor: pointer;
+              background-color: #d90429 ;
+            }
+          }
         }
       }
 

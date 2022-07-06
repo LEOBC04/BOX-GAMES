@@ -2,6 +2,7 @@ import React from "react";
 import ratingImg from "../../assets/rating.png";
 import s from "./favorites.module.scss";
 import Footer from "../Home/footer";
+import { Link } from "react-router-dom";
 import { removeFromFavorites } from "../../Redux/slices/videogameSlice";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -36,7 +37,9 @@ const Favorites = () => {
                 <button onClick={() => dispatch(removeFromFavorites(game.id))}>
                   Remove from favorites
                 </button>
+                <Link to={`/videogame/detail/${game.id}`}>
                 <button className={s.detail}>Detail</button>
+                </Link>
               </div>
             </div>
         ))}

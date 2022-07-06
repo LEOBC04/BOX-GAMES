@@ -5,7 +5,7 @@ const { apiKey } = require("../utils/config/index");
 const apiVideogames = async () => {
   try {
     let videogames = [];
-    const pages = [10];
+    const pages = [10, 11, 12, 13, 14];
 
     for (let i = 0; i < pages.length; i++) {
       const page = (
@@ -168,7 +168,7 @@ const postVideogame = async (req, res, next) => {
       req.body;
 
     const createdVideogame = await Videogame.create({
-      name,
+      name: name.toUpperCase(),
       description,
       released,
       rating,
@@ -186,7 +186,7 @@ const postVideogame = async (req, res, next) => {
       });
       await createdVideogame.addGenre(currentId);
     });
-    res.status(200).send(createdVideogame);
+    res.status(201).send(createdVideogame);
   } catch (error) {
     next(error);
   }

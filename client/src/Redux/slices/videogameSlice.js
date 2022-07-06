@@ -3,6 +3,12 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   videogames: [],
   videogamesCopy: [],
+  videogamesOrderAZ: [],
+  videogamesOrderZA: [],
+  videogamesRatingMax: [],
+  videogamesRatingMin: [],
+  videogamesFilterType: [],
+  videogamesFilterGenre: [],
   favVideogames: [],
   videogamesDetail: {},
 };
@@ -54,8 +60,33 @@ const videogameSlice = createSlice({
       // console.log(action.payload);
       state.videogames = action.payload;
     },
-    orderVideogames(state, action) {
-      state.videogames = action.payload;
+    orderVideogamesRequest(state, action) {
+      if(action.payload.order === 'asc'){
+        state.videogamesOrderAZ = action.payload.response;
+      }
+      if(action.payload.order === 'desc'){
+        state.videogamesOrderZA = action.payload.response;
+      }
+      if(action.payload.order === 'max'){
+        state.videogamesRatingMax = action.payload.response;
+      }
+      if(action.payload.order === 'min'){
+        state.videogamesRatingMin = action.payload.response;
+      }
+    },
+    orderVideogames(state, action){
+      if(action.payload === 'asc'){
+        state.videogames = state.videogamesOrderAZ
+      }
+      if(action.payload === 'desc'){
+        state.videogames = state.videogamesOrderZA
+      }
+      if(action.payload === 'max'){
+        state.videogames = state.videogamesRatingMax
+      }
+      if(action.payload === 'min'){
+        state.videogames = state.videogamesRatingMin
+      }
     },
     reloadVideogames(state, action) {
       state.videogames = state.videogamesCopy;
@@ -73,6 +104,7 @@ export const {
   filterByType,
   reloadVideogames,
   filterByGenre,
+  orderVideogamesRequest,
   orderVideogames
 } = videogameSlice.actions;
 
