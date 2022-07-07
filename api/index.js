@@ -24,8 +24,8 @@ const { serverPort } = require("./src/utils/config/index");
 
 conn.sync({ force: false }).then(() => {
   console.log("Database connected");
-  server.listen(serverPort, async () => {
-    console.log(`Server listening on port ${serverPort}`);
+  server.listen(process.env.PORT || serverPort, async () => {
+    console.log('Server listening on port ', process.env.PORT || serverPort);
     await genres();
   });
 });
