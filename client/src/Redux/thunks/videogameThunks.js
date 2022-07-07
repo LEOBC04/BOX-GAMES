@@ -7,7 +7,7 @@ import {
 
 const fetchAllVideogames = () => (dispatch) => {
   axios
-    .get("http://localhost:3001/videogames")
+    .get("/videogames")
     .then((response) => {
       dispatch(getVideogames(response.data));
     })
@@ -16,21 +16,21 @@ const fetchAllVideogames = () => (dispatch) => {
 
 const fetchVideogamesDetail = (id) => (dispatch) => {
   axios
-    .get(`http://localhost:3001/videogames/${id}`)
+    .get(`/videogames/${id}`)
     .then((response) => dispatch(getDetail(response.data)))
     .catch((error) => console.log(error));
 };
 
 const fetchVideogameByName = (name) => (dispatch) => {
   axios
-    .get(`http://localhost:3001/videogames/name?name=${name}`)
+    .get(`/videogames/name?name=${name}`)
     .then((response) => dispatch(searchVideogame(response.data)))
     .catch((error) => console.log(error));
 };
 
 const saveVideogame = (form) => () => {
   axios
-    .post("http://localhost:3001/videogames", form)
+    .post("/videogames", form)
     .catch((error) => console.log(error));
 };
 

@@ -3,7 +3,7 @@ import { getGenres } from "../slices/genreSlice";
 
 const fetchAllGenres = () => (dispatch) => {
   axios
-    .get("http://localhost:3001/genres")
+    .get("/genres")
     .then((response) => dispatch(getGenres(response.data)))
     .catch((error) => console.log(error));
 };
