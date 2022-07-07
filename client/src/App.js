@@ -1,4 +1,4 @@
-// import './APP.css'
+import s from './APP.scss'
 import { Routes, Route } from "react-router-dom";
 import LandingPage from "./components/LandingPage/landingPage.jsx";
 import NavBar from "./components/NavBar/navBar.jsx";
@@ -9,7 +9,7 @@ import Favorites from "./components/Favorites/favorites.jsx";
 
 function App() {
   return (
-    <div className="App">
+    <div className={s.App}>
       <Routes>
         <Route path="/" element={< LandingPage />} />
         <Route path="/" element={< NavBar />}>
