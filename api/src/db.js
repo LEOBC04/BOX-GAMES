@@ -27,7 +27,7 @@ let sequelize =
       },
       ssl: true,
     })
-    : new Sequelize(`postgres://${dbUser}:${dbPassword}@${dbHost}:${dbPort}/${dbName}`, {
+    : new Sequelize(`postgres://${dbUser}:${dbPassword}@${dbHost}/${dbName}`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
