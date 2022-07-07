@@ -1,4 +1,4 @@
-import './APP.css'
+// import './APP.css'
 import { Routes, Route } from "react-router-dom";
 import LandingPage from "./components/LandingPage/landingPage.jsx";
 import NavBar from "./components/NavBar/navBar.jsx";
