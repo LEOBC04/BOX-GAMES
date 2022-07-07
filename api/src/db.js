@@ -8,7 +8,7 @@ let sequelize =
   process.env.NODE_ENV === "production"
     ? new Sequelize({
       database: dbName,
-      dialect: "postgress",
+      dialect: "postgres",
       host: dbHost,
       port: 5432,
       username: dbUser,
