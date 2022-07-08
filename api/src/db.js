@@ -7,12 +7,12 @@ const { dbUser, dbPassword, dbHost, dbPort, dbName } = require('./utils/config/i
 let sequelize = 
   process.env.NODE_ENV === "production"
     ? new Sequelize({
-      database: process.env.DB_NAME,
+      database: dbName,
       dialect: "postgres",
-      host: process.env.DB_HOST,
-      port: process.env.DB_PORT,
-      username: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
+      host: dbHost,
+      port: 5432,
+      username: dbUser,
+      password: dbPassword,
       pool: {
         max: 3,
         min: 1,
@@ -21,13 +21,14 @@ let sequelize =
       dialectOptions: {
         ssl: {
           require: true,
+            // Ref.: https://github.com/brianc/node-postgres/issues/2009
           rejectUnauthorized: false,
         },
         keepAlive: true,
       },
       ssl: true,
     })
-    : new Sequelize(`postgres://${dbUser}:${dbPassword}@${dbHost}/${dbName}`, {
+    : new Sequelize(`postgres://${dbUser}:${dbPassword}@${dbHost}/videogames`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
