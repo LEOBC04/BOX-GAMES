@@ -24,8 +24,10 @@ let port = process.env.PORT || 3001
 
 conn.sync({ force: false }).then(() => {
   console.log("Database connected");
-  server.listen(port, async () => {
-    console.log('Server listening on port 3001');
-    await genres();
-  });
+  server.listen(port, 
+    console.log('Server listening on port 3001')
+    // async () => {
+    // await genres();
+  // }
+  );
 });
