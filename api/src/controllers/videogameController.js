@@ -5,7 +5,7 @@ const { apiKey } = require("../utils/config/index");
 const apiVideogames = async () => {
   try {
     let videogames = [];
-    const pages = [10, 11, 12, 13, 14];
+    const pages = [10];
 
     for (let i = 0; i < pages.length; i++) {
       const page = (
@@ -27,13 +27,14 @@ const getApiVideogames = async () => {
     const videogamesFiltered = videogames.map((game) => {
       return {
         id: game.id,
-        name: game.name,
+        name: (game.name.toUpperCase()),
         image: game.background_image,
         genres: game.genres.map((genre) => genre.name),
         rating: game.rating,
         released: game.released,
       };
     });
+
     return videogamesFiltered;
   } catch (error) {
     console.log(error);

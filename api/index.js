@@ -18,15 +18,16 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require("./src/app.js");
-const { genres } = require("./src/controllers/genreController");
+// const { genres } = require("./src/controllers/genreController");
 const { conn } = require("./src/db.js");
-let port = process.env.PORT || 3001
+// const { serverPort } = require("./src/utils/config/index");
 
 conn.sync({ force: false }).then(() => {
   console.log("Database connected");
-  server.listen(port, 
-    console.log('Server listening on port 3001')
+  server.listen(process.env.PORT, 
     // async () => {
+    console.log('Server listening on port 3001')
+    // ;
     // await genres();
   // }
   );
