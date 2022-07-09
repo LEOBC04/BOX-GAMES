@@ -5,7 +5,7 @@ const { apiKey } = require("../utils/config/index");
 const apiVideogames = async () => {
   try {
     let videogames = [];
-    const pages = [10];
+    const pages = [10, 11, 12, 13, 14];
 
     for (let i = 0; i < pages.length; i++) {
       const page = (
