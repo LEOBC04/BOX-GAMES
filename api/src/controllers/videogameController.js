@@ -58,7 +58,7 @@ const getAllVideogames = async (req, res, next) => {
   try {
     const apiGames = await getApiVideogames();
     const dbGames = await getDbGames();
-    const allGames = apiGames.concat(dbGames);
+    const allGames = await apiGames.concat(dbGames);
     res.status(200).send(allGames);
   } catch (error) {
     next(error);
