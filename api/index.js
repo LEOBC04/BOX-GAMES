@@ -22,7 +22,7 @@ const { genres } = require("./src/controllers/genreController");
 const { conn } = require("./src/db.js");
 // const { serverPort } = require("./src/utils/config/index");
 
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: false }).then(() => {
   console.log("Database connected");
   server.listen(process.env.PORT, 
     async () => {
