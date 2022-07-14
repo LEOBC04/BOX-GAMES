@@ -3,7 +3,7 @@ const { Sequelize, Op } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const { dbUser, dbPassword, dbHost, dbPort, dbName } = require('./utils/config/index');
-const { DB_NAME, DB_HOST, DB_USER, DB_PASSWORD} = process.env
+const { DB_NAME, DB_HOST, DB_USER, DB_PASSWORD } = process.env;
 
 let sequelize = 
   process.env.NODE_ENV === "production"

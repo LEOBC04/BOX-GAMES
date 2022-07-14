@@ -23,7 +23,7 @@ const { conn } = require("./src/db.js");
 // const { serverPort } = require("./src/utils/config/index");
 let port = process.env.PORT || 3001
 
-conn.sync({ force: false }).then(() => {
+conn.sync({ force: true }).then(() => {
   console.log("Database connected");
   server.listen(port, 
     async () => {
