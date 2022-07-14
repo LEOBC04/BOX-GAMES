@@ -20,6 +20,10 @@ const Home = () => {
   const firstIndex = lastIndex - gamesPerPage;
   const currentGames = videogames.slice(firstIndex, lastIndex );
 
+  if(currentPage > Math.ceil(videogames.length/ gamesPerPage) && currentPage !== 1) {
+    setcurrentPage(1);
+  }
+
   const changePage = (pageNumber) => {
     setcurrentPage(pageNumber);
   }
