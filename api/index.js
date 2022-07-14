@@ -21,11 +21,10 @@ const server = require("./src/app.js");
 const { genres } = require("./src/controllers/genreController");
 const { conn } = require("./src/db.js");
 // const { serverPort } = require("./src/utils/config/index");
-let port = process.env.PORT || 3001
 
 conn.sync({ force: true }).then(() => {
   console.log("Database connected");
-  server.listen(port, 
+  server.listen(process.env.PORT, 
     async () => {
     console.log('Server listening on port 3001');
     await genres();
